@@ -3,9 +3,18 @@ import './App.css';
 import PhoneForm from './components/PhoneForm';
 import PhoneInfoList from './components/PhoneInfoList';
 
+const data = JSON.parse(localStorage.getItem('data'));
+
 class App extends Component {
-  id = 2;
+  id = 0;
+
   state = {
+    information: [],
+  };
+
+  // TODO : 로컬 스토리지 내용을 파싱받아와서 뿌려주기
+
+  /*state = {
     information: [
       {
         id: 0,
@@ -19,7 +28,7 @@ class App extends Component {
       },
     ],
     keyword: '',
-  };
+  };*/
 
   handleCreate = (data) => {
     const { information } = this.state;

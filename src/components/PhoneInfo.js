@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const data = JSON.parse(localStorage.getItem('data'));
+
 class PhoneInfo extends Component {
   static defaultProps = {
     info: {
@@ -104,7 +106,25 @@ class PhoneInfo extends Component {
       );
     }
 
-    const { name, phone, id } = this.props.info;
+    //const { name, phone, id } = this.props.info;
+
+    /*return data.map((element) => (
+      <div style={style}>
+        <div>
+          <b>{element.name}</b>
+        </div>
+        <div>{element.phone}</div>
+        <button onClick={this.handleToggleEdit}>수정</button>
+        <button onClick={this.handleRemove}>삭제</button>
+      </div>
+    ));*/
+
+    /*return data.map((element) => (
+      <div style={style}>
+        <div>{element.name}</div>
+      </div>
+    ));*/
+    const { name, phone } = this.props.info;
 
     return (
       <div style={style}>

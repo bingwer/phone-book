@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
+let data = [];
+
 class PhoneForm extends Component {
   state = {
     name: '',
     phone: '',
   };
+
+  componentDidMount() {
+    data = JSON.parse(localStorage.getItem('data'));
+    //console.log(data, data.length);
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -15,6 +22,8 @@ class PhoneForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    data.push(this.state);
+    localStorage.setItem('data', JSON.stringify(data));
     this.props.onCreate(this.state);
     this.setState({
       name: '',
