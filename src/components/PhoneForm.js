@@ -8,11 +8,6 @@ class PhoneForm extends Component {
     phone: '',
   };
 
-  componentDidMount() {
-    data = JSON.parse(localStorage.getItem('data'));
-    //console.log(data, data.length);
-  }
-
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -22,8 +17,6 @@ class PhoneForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    data.push(this.state);
-    localStorage.setItem('data', JSON.stringify(data));
     this.props.onCreate(this.state);
     this.setState({
       name: '',

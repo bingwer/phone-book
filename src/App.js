@@ -3,18 +3,12 @@ import './App.css';
 import PhoneForm from './components/PhoneForm';
 import PhoneInfoList from './components/PhoneInfoList';
 
-const data = JSON.parse(localStorage.getItem('data'));
+const data = JSON.parse(localStorage.getItem('information'));
 
 class App extends Component {
-  id = 0;
+  id = data.length + 1;
 
   state = {
-    information: [],
-  };
-
-  // TODO : 로컬 스토리지 내용을 파싱받아와서 뿌려주기
-
-  /*state = {
     information: [
       {
         id: 0,
@@ -28,7 +22,27 @@ class App extends Component {
       },
     ],
     keyword: '',
-  };*/
+  };
+
+  // TODO : 로컬 스토리지 내용을 파싱받아와서 뿌려주기
+
+  UNSAFE_componentWillMount() {
+    const information = localStorage.information;
+    if (information) {
+      this.setState({
+        information: JSON.parse(information),
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      JSON.stringify(prevState.information) !==
+      JSON.stringify(this.state.information)
+    ) {
+      localStorage.information = JSON.stringify(this.state.information);
+    }
+  }
 
   handleCreate = (data) => {
     const { information } = this.state;
