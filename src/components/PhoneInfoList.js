@@ -13,7 +13,7 @@ class PhoneInfoList extends Component {
   }
 
   render() {
-    console.log('render PhoneInfoList'); // SCU를 사용함으로써 List쪽 컴포넌트는 계속 리렌더링 되지만 내부 컴포넌트는 리렌더링이 되지 않기 때문에 문제가 안된다.
+    //console.log('render PhoneInfoList'); // SCU를 사용함으로써 List쪽 컴포넌트는 계속 리렌더링 되지만 내부 컴포넌트는 리렌더링이 되지 않기 때문에 문제가 안된다.
     const { data, onRemove, onUpdate } = this.props;
     const list = data.map((info) => (
       <PhoneInfo

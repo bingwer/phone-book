@@ -6,7 +6,7 @@ import PhoneInfoList from './components/PhoneInfoList';
 const data = JSON.parse(localStorage.getItem('information'));
 
 class App extends Component {
-  id = data.length + 1;
+  id = data.length;
 
   state = {
     information: [
@@ -24,7 +24,15 @@ class App extends Component {
     keyword: '',
   };
 
-  // TODO : 로컬 스토리지 내용을 파싱받아와서 뿌려주기
+  // TODO : state값과 localstrage의 id값 문제, 렌더링 문제 해결
+  idUpdate() {
+    const { information } = this.state;
+    for (let i = 0; i < information.length; i++) {
+      this.setState(() => {
+        information[i].id = i;
+      });
+    }
+  }
 
   UNSAFE_componentWillMount() {
     const information = localStorage.information;
@@ -33,9 +41,14 @@ class App extends Component {
         information: JSON.parse(information),
       });
     }
+    this.idUpdate();
+    console.log(information);
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { information } = this.state;
+    this.idUpdate();
+    console.log(information);
     if (
       JSON.stringify(prevState.information) !==
       JSON.stringify(this.state.information)
@@ -56,6 +69,7 @@ class App extends Component {
     this.setState({
       information: information.filter((info) => info.id !== id), //id가 삭제할 id가 아닌것만 필터링 해서 새로 만들어줌
     });
+    this.idUpdate();
   };
 
   handleUpdate = (id, data) => {
